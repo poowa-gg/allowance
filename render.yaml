@@ -1,0 +1,29 @@
+# Render Blueprint (infrastructure as code): one click creates the public demo.
+# The demo runs with a SIMULATED PayPal, gives every visitor a private session, and caps AI use.
+services:
+  - type: web
+    name: allowance-demo
+    runtime: node
+    plan: free
+    autoDeploy: true            # redeploys on every push to the connected branch
+    buildCommand: npm ci --include=dev
+    startCommand: npx tsx src/app/server.ts
+    healthCheckPath: /api/health  # Render only routes traffic once this returns 200
+    envVars:
+      - key: NODE_VERSION
+        value: "22"
+      - key: ALLOWANCE_HOST
+        value: 0.0.0.0
+      - key: ALLOWANCE_MAX_LLM_RUNS_PER_HOUR
+        value: "30"
+      - key: GROQ_API_KEY
+        sync: false             # secret: you type it in Render's dashboard, it never lives in the repo
+
+  # OPTIONAL (cron jobs may need a paid Render plan): attack the production build every hour.
+  # Remove the leading "# " on each line below to enable. The job fails loudly if any attack ever gets through.
+  # - type: cron
+  #   name: allowance-redteam
+  #   runtime: node
+  #   schedule: "0 * * * *"
+  #   buildCommand: npm ci --include=dev
+  #   startCommand: npx tsx src/jobs/redteam-ci.ts

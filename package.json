@@ -1,0 +1,34 @@
+{
+  "name": "allowance",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run",
+    "spike:orders": "tsx src/spikes/01-orders.ts",
+    "spike:orders:capture": "tsx src/spikes/01-orders.ts --capture",
+    "spike:mcp": "tsx src/spikes/02-mcp-tools.ts",
+    "spike:call": "tsx src/spikes/03-call-tool.ts",
+        "smoke": "tsx src/spikes/04-smoke.ts",
+    "smoke:live": "tsx src/spikes/04-smoke.ts --live",
+    "proxy": "tsx src/mcp/server.ts",
+        "dev": "tsx src/app/server.ts",
+    "dev:live": "tsx src/app/server.ts --live"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.1",
+    "dotenv": "^18.0.9",
+    "zod": "^4.6.7"
+  },
+  "devDependencies": {
+    "@paypal/mcp": "^1.8.1",
+    "@types/node": "^26.6.5",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vitest": "^5.0.5"
+  }
+}

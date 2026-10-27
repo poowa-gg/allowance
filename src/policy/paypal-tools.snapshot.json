@@ -1,0 +1,13 @@
+{
+  "capturedAt": "2026-10-23",
+  "source": "live PayPal MCP server (@paypal/mcp --tools=all), sandbox",
+  "note": "To refresh: run `npm run spike:mcp`, then copy the tool names from docs/paypal-mcp-tools.json into this list and classify any new ones in risk.ts.",
+  "tools": [
+    "create_invoice", "list_invoices", "get_invoice", "send_invoice", "send_invoice_reminder",
+    "cancel_sent_invoice", "generate_invoice_qr_code", "create_product", "list_products", "update_product",
+    "show_product_details", "create_subscription_plan", "list_subscription_plans", "show_subscription_plan_details",
+    "create_subscription", "show_subscription_details", "cancel_subscription", "create_shipment_tracking",
+    "get_shipment_tracking", "create_order", "get_order", "pay_order", "list_disputes", "get_dispute",
+    "accept_dispute_claim", "list_transactions", "create_refund", "get_refund"
+  ]
+}

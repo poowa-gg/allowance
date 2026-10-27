@@ -1,0 +1,7 @@
+
+# audit logs are local runtime data
+.env
+.next
+data/
+dist
+node_modules
