@@ -23,37 +23,37 @@ option: routine jobs run automatically, risky ones wait for a human, a kill swit
 tamper-evident record. With the default settings, even a fully hijacked agent cannot move more than the owner's daily limit without approval.
 Beneficiaries: shop owners, freelancers and agencies, finance teams, builders of AI agents, and customers. See docs/IMPACT.md.
 
-## How we use PayPal
+## How I use PayPal
 - PayPal's official MCP server (`@paypal/mcp`) executes approved actions in the sandbox. Verified: a refund approved by a human completed.
 - PayPal REST API provides trusted facts (capture, dispute and order amounts) and the authorize/capture/void lifecycle.
 - A real trap we designed around: omitting `amount` on a refund refunds the whole payment, which defeats naive limits.
 
-## How we use AI
+## How I use AI
 - A tool-using agent (Groq `openai/gpt-oss-120b` by default; any OpenAI-compatible service or Anthropic also work).
 - An AI risk reviewer that explains why an action looks manipulated. It can only escalate to a human, never approve.
 - A policy writer that turns plain English into a drafted policy change, validated strictly and applied only when the owner approves.
 - AI never has authority over money: a deterministic engine decides.
 
-## How we use AG Grid
+## How I use AG Grid
 The audit trail and ledger are AG Grid tables with sorting, resizing, coloured verdict pills and live updates.
 
-## How we use Render
+## How I use Render
 The public demo is deployed from a `render.yaml` Blueprint: web service with a health check (`/api/health`, which also reports the platform and build), auto-deploy on push, a secret AI key,
 per-visitor private sessions, a shared AI budget, a footer that shows "Hosted on Render" with the build id from Render's environment, and an optional hourly cron job that attacks the production build.
 
-## How we built it
+## How I built it
 TypeScript and Node.js, Model Context Protocol SDK, PayPal sandbox, AG Grid, Vitest (128 tests), GitHub Actions CI. A responsive dark/light interface with an animated live diagram, tested on phone and desktop sizes in a real browser. A pure-function policy engine;
 a gateway with a lock so simultaneous calls cannot overspend; a hash-chained audit log; a provider-neutral LLM layer with retries and automatic model discovery.
 
 ## Challenges
 - Making limits un-gameable: omitted amounts, structuring (many small refunds), races, smuggled fields, inbox flooding.
-- Finding our own design flaw: held requests used to reserve budget, letting a compromised agent starve legitimate work. We fixed it and bounded the inbox.
+- Finding my own design flaw: held requests used to reserve budget, letting a compromised agent starve legitimate work. We fixed it and bounded the inbox.
 - Free AI tiers rate-limit and rename models; the client retries and discovers working models by itself.
 
 ## Accomplishments
 A live demo where a fooled agent tries to move $600 and only the honest $5 leaves the account, with the AI reviewer explaining why.
 
-## What we learned
+## What I learnt
 Assume the agent is already compromised, and constrain what a fooled agent can do.
 
 ## What's next
